@@ -9,6 +9,11 @@ export interface SiteConfig {
   url: string;
   ogImage: string;
   twitterHandle: string;
+  // BCP47 language tag, used for <html lang> and the RSS <language> tag.
+  lang: string;
+  // og:locale value (e.g. 'en_US'). Defaults to a locale derived from `lang`
+  // when omitted.
+  ogLocale?: string;
 
   // Theme settings
   theme: {
@@ -77,21 +82,23 @@ const siteConfig: SiteConfig = {
   url: 'https://kpab.github.io/astro-haze',
   ogImage: '/og-image.png',
   twitterHandle: '@yourusername',
+  lang: 'en',
+  ogLocale: 'en_US',
 
   theme: {
     accentColor: 'hsl(280, 70%, 60%)',
     defaultColorMode: 'system',
-    showThemeToggle: true
+    showThemeToggle: true,
   },
 
   nav: {
     main: [
       { name: 'Home', href: '/' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Portfolio', href: '/work' },
-      { name: 'Landing', href: '/landing' },
-      { name: 'About', href: '/about' }
-    ]
+      { name: 'Blog', href: '/blog/' },
+      { name: 'Portfolio', href: '/work/' },
+      { name: 'Landing', href: '/landing/' },
+      { name: 'About', href: '/about/' },
+    ],
   },
 
   features: {
@@ -100,13 +107,13 @@ const siteConfig: SiteConfig = {
     landing: true,
     rss: true,
     sitemap: true,
-    search: true
+    search: true,
   },
 
   social: {
     github: 'https://github.com/yourusername',
     twitter: 'https://twitter.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername'
+    linkedin: 'https://linkedin.com/in/yourusername',
   },
 
   blog: {
@@ -114,13 +121,13 @@ const siteConfig: SiteConfig = {
     showToc: true,
     showReadingTime: true,
     showShareButtons: true,
-    showRelatedPosts: true
+    showRelatedPosts: true,
   },
 
   portfolio: {
     projectsPerPage: 9,
     showTechStack: true,
-    showYear: true
+    showYear: true,
   },
 
   footer: {
@@ -128,9 +135,47 @@ const siteConfig: SiteConfig = {
     // without those pages, so add them here only once the pages exist.
     links: [
       { name: 'Sitemap', href: '/sitemap-index.xml' },
-      { name: 'RSS', href: '/rss.xml' }
-    ]
-  }
+      { name: 'RSS', href: '/rss.xml' },
+    ],
+  },
 };
+
+// Conventional region for language-only BCP47 tags (no '-REGION' suffix),
+// used so common cases like 'en' or 'ja' derive a real og:locale value
+// ('en_US', 'ja_JP') instead of duplicating the language code.
+const COMMON_REGIONS: Record<string, string> = {
+  en: 'US',
+  ja: 'JP',
+  zh: 'CN',
+  fr: 'FR',
+  de: 'DE',
+  es: 'ES',
+  pt: 'PT',
+  ko: 'KR',
+  it: 'IT',
+  ru: 'RU',
+  ar: 'SA',
+  nl: 'NL',
+  pl: 'PL',
+  tr: 'TR',
+  vi: 'VN',
+  th: 'TH',
+  id: 'ID',
+  hi: 'IN',
+};
+
+// Derives an og:locale-shaped value ('language_REGION') from a BCP47 lang
+// tag when `ogLocale` isn't set explicitly, e.g. 'en' -> 'en_US', 'en-GB' ->
+// 'en_GB'. Unlisted languages without a region fall back to duplicating the
+// language code (e.g. 'sv' -> 'sv_SV'). Best-effort only — set `ogLocale`
+// explicitly for exact control.
+export function deriveOgLocale(lang: string): string {
+  const [language, region] = lang.split('-');
+  const fallbackRegion = COMMON_REGIONS[language.toLowerCase()] ?? language;
+  return `${language}_${(region ?? fallbackRegion).toUpperCase()}`;
+}
+
+export const resolvedOgLocale =
+  siteConfig.ogLocale ?? deriveOgLocale(siteConfig.lang);
 
 export default siteConfig;

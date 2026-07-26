@@ -1,5 +1,5 @@
 ---
-import siteConfig from '@/site.config';
+import siteConfig, { resolvedOgLocale } from '@/site.config';
 import { withBase } from '@/lib/url';
 
 export interface Props {
@@ -8,10 +8,14 @@ export interface Props {
   ogImage?: string;
   noIndex?: boolean;
   article?: {
+    // Defaults to 'BlogPosting'. 'CreativeWork' is for non-post content
+    // (e.g. portfolio case studies) that still wants og:type=article.
+    type?: 'BlogPosting' | 'CreativeWork';
     publishedTime?: string;
     modifiedTime?: string;
     author?: string;
     tags?: string[];
+    year?: number;
   };
 }
 
@@ -32,27 +36,46 @@ const ogImageURL = new URL(withBase(ogImage), Astro.site).href;
 
 // JSON-LD structured data — serialized so values are emitted as real JSON,
 // not as un-evaluated source text (a common is:inline pitfall).
-const jsonLd = article
+const jsonLd = !article
   ? {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: title,
-      description,
-      url: canonicalURL.href,
-      image: ogImageURL,
-      datePublished: article.publishedTime,
-      dateModified: article.modifiedTime ?? article.publishedTime,
-      author: { '@type': 'Person', name: article.author ?? siteConfig.author },
-      publisher: { '@type': 'Organization', name: siteConfig.name },
-      keywords: article.tags?.join(', '),
-    }
-  : {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: siteConfig.name,
       description: siteConfig.description,
       url: new URL(withBase('/'), Astro.site).href,
-    };
+    }
+  : article.type === 'CreativeWork'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: title,
+        description,
+        url: canonicalURL.href,
+        image: [ogImageURL],
+        ...(article.year ? { dateCreated: String(article.year) } : {}),
+        creator: {
+          '@type': 'Person',
+          name: article.author ?? siteConfig.author,
+        },
+        publisher: { '@type': 'Organization', name: siteConfig.name },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description,
+        url: canonicalURL.href,
+        image: [ogImageURL],
+        mainEntityOfPage: canonicalURL.href,
+        datePublished: article.publishedTime,
+        dateModified: article.modifiedTime ?? article.publishedTime,
+        author: {
+          '@type': 'Person',
+          name: article.author ?? siteConfig.author,
+        },
+        publisher: { '@type': 'Organization', name: siteConfig.name },
+        keywords: article.tags?.join(', '),
+      };
 ---
 
 <!-- Title & Description -->
@@ -69,13 +92,18 @@ const jsonLd = article
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={siteConfig.name} />
 <meta property="og:image" content={ogImageURL} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={resolvedOgLocale} />
 
 <!-- Article metadata -->
 {
   article && (
     <>
-      <meta property="article:published_time" content={article.publishedTime} />
+      {article.publishedTime && (
+        <meta
+          property="article:published_time"
+          content={article.publishedTime}
+        />
+      )}
       {article.modifiedTime && (
         <meta property="article:modified_time" content={article.modifiedTime} />
       )}

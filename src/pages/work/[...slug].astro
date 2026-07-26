@@ -41,13 +41,16 @@ const projectLinks = [
     href: withBase(project.data.links.case),
     external: false,
   },
-].filter((link): link is { label: string; href: string; external: boolean } => Boolean(link));
+].filter((link): link is { label: string; href: string; external: boolean } =>
+  Boolean(link),
+);
 ---
 
 <BaseLayout
   title={project.data.title}
   description={description}
   ogImage={project.data.cover.src}
+  article={{ type: 'CreativeWork', year: project.data.year }}
 >
   <Header />
 
@@ -55,11 +58,13 @@ const projectLinks = [
     <article>
       <header class="case-hero">
         <Container size="xl">
-          <a class="case-hero__back" href={withBase('/work')}>← All work</a>
+          <a class="case-hero__back" href={withBase('/work/')}>← All work</a>
 
           <div class="case-hero__heading">
             <p class="case-hero__kicker">
-              {project.data.role}{siteConfig.portfolio.showYear && ` / ${project.data.year}`}
+              {project.data.role}{
+                siteConfig.portfolio.showYear && ` / ${project.data.year}`
+              }
             </p>
             <h1>{project.data.title}</h1>
             <p class="case-hero__summary">{project.data.summary}</p>
@@ -84,38 +89,48 @@ const projectLinks = [
           <aside class="case-facts" aria-label="Project details">
             <GlassCard padding="md" radius="lg" class="case-facts__card">
               <dl>
-                {project.data.client && (
-                  <div>
-                    <dt>Client</dt>
-                    <dd>{project.data.client}</dd>
-                  </div>
-                )}
+                {
+                  project.data.client && (
+                    <div>
+                      <dt>Client</dt>
+                      <dd>{project.data.client}</dd>
+                    </div>
+                  )
+                }
                 <div>
                   <dt>Role</dt>
                   <dd>{project.data.role}</dd>
                 </div>
-                {siteConfig.portfolio.showYear && (
-                  <div>
-                    <dt>Year</dt>
-                    <dd>{project.data.year}</dd>
-                  </div>
-                )}
-                {project.data.duration && (
-                  <div>
-                    <dt>Duration</dt>
-                    <dd>{project.data.duration}</dd>
-                  </div>
-                )}
+                {
+                  siteConfig.portfolio.showYear && (
+                    <div>
+                      <dt>Year</dt>
+                      <dd>{project.data.year}</dd>
+                    </div>
+                  )
+                }
+                {
+                  project.data.duration && (
+                    <div>
+                      <dt>Duration</dt>
+                      <dd>{project.data.duration}</dd>
+                    </div>
+                  )
+                }
               </dl>
 
-              {siteConfig.portfolio.showTechStack && (
-                <div class="case-facts__stack">
-                  <p>Stack</p>
-                  <ul>
-                    {project.data.tech.map((item) => <li>{item}</li>)}
-                  </ul>
-                </div>
-              )}
+              {
+                siteConfig.portfolio.showTechStack && (
+                  <div class="case-facts__stack">
+                    <p>Stack</p>
+                    <ul>
+                      {project.data.tech.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              }
             </GlassCard>
           </aside>
 
@@ -125,34 +140,41 @@ const projectLinks = [
               <Content />
             </div>
 
-            {projectLinks.length > 0 && (
-              <div class="case-actions" aria-label="Project links">
-                {projectLinks.map((link, index) => (
-                  <Button
-                    href={link.href}
-                    variant={index === 0 ? 'solid' : 'outline'}
-                    external={link.external}
-                  >
-                    {link.label}
-                    <span aria-hidden="true">↗</span>
-                  </Button>
-                ))}
-              </div>
-            )}
+            {
+              projectLinks.length > 0 && (
+                <div class="case-actions" aria-label="Project links">
+                  {projectLinks.map((link, index) => (
+                    <Button
+                      href={link.href}
+                      variant={index === 0 ? 'solid' : 'outline'}
+                      external={link.external}
+                    >
+                      {link.label}
+                      <span aria-hidden="true">↗</span>
+                    </Button>
+                  ))}
+                </div>
+              )
+            }
           </div>
         </div>
       </Container>
 
-      {project.data.images && (
-        <Container size="xl">
-          <ProjectGallery images={project.data.images} title={project.data.title} />
-        </Container>
-      )}
+      {
+        project.data.images && (
+          <Container size="xl">
+            <ProjectGallery
+              images={project.data.images}
+              title={project.data.title}
+            />
+          </Container>
+        )
+      }
 
       <Container size="xl">
         <nav class="case-next" aria-label="Portfolio navigation">
           <p>End of case file</p>
-          <a href={withBase('/work')}>
+          <a href={withBase('/work/')}>
             Explore all work
             <span aria-hidden="true">→</span>
           </a>
@@ -380,7 +402,7 @@ const projectLinks = [
     color: var(--color-accent);
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     .case-hero__heading {
       display: block;
     }

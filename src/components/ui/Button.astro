@@ -6,6 +6,9 @@ export interface Props {
   type?: 'button' | 'submit' | 'reset';
   fullWidth?: boolean;
   disabled?: boolean;
+  // When omitted, external is auto-detected from `href` (absolute http(s)
+  // URLs open in a new tab; anchors/relative paths don't). Pass explicitly
+  // to override.
   external?: boolean;
   class?: string;
   'aria-label'?: string;
@@ -18,10 +21,19 @@ const {
   type = 'button',
   fullWidth = false,
   disabled = false,
-  external = false,
+  external,
   class: className = '',
+  'aria-label': ariaLabel,
   ...rest
 } = Astro.props;
+
+const isExternal = external ?? href?.startsWith('http') ?? false;
+
+// aria-label replaces the accessible name computed from child content, so
+// the visually-hidden "(opens in new tab)" span below would otherwise go
+// unannounced whenever a caller also passes aria-label.
+const resolvedAriaLabel =
+  isExternal && ariaLabel ? `${ariaLabel} (opens in new tab)` : ariaLabel;
 
 const Tag = href ? 'a' : 'button';
 const classes = [
@@ -39,13 +51,15 @@ const classes = [
   class={classes}
   href={href}
   type={href ? undefined : type}
-  rel={external ? 'noopener noreferrer' : undefined}
-  target={external ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+  target={isExternal ? '_blank' : undefined}
   aria-disabled={href && disabled ? 'true' : undefined}
   disabled={!href && disabled ? true : undefined}
+  aria-label={resolvedAriaLabel}
   {...rest}
 >
   <slot />
+  {isExternal && <span class="sr-only"> (opens in new tab)</span>}
 </Tag>
 
 <style>
@@ -56,6 +70,7 @@ const classes = [
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
+    min-height: 44px;
     padding: var(--btn-py) var(--btn-px);
     border-radius: var(--radius-md);
     font-weight: 600;
@@ -89,6 +104,7 @@ const classes = [
   .btn--sm {
     --btn-py: var(--space-xs);
     --btn-px: var(--space-md);
+    min-height: 36px;
     font-size: var(--text-sm);
   }
   .btn--lg {
@@ -108,23 +124,12 @@ const classes = [
     border-color: var(--glass-border);
     color: var(--color-text);
   }
-  .btn--glass:hover {
-    transform: translateY(-1px);
-    background: var(--color-accent-glass);
-    border-color: var(--color-accent);
-    box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
-  }
-
   /* Solid variant — uses the darker accent so near-white label text clears
      WCAG AA contrast in light mode (the brighter accent is ~3.6:1). */
   .btn--solid {
     background: var(--color-accent-dark);
     color: var(--color-text-inverse);
     box-shadow: 0 4px 16px -4px var(--color-accent);
-  }
-  .btn--solid:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px -6px var(--color-accent);
   }
 
   /* Outline variant */
@@ -133,22 +138,40 @@ const classes = [
     border-color: var(--color-accent);
     color: var(--color-accent-text);
   }
-  .btn--outline:hover {
-    background: var(--color-accent-glass);
-    transform: translateY(-1px);
-  }
 
   /* Ghost variant */
   .btn--ghost {
     background: transparent;
     color: var(--color-text);
   }
-  .btn--ghost:hover {
-    background: var(--color-surface);
+
+  @media (hover: hover) {
+    .btn--glass:hover {
+      transform: translateY(-1px);
+      background: var(--color-accent-glass);
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
+    }
+    .btn--solid:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px -6px var(--color-accent);
+    }
+    .btn--outline:hover {
+      background: var(--color-accent-glass);
+      transform: translateY(-1px);
+    }
+    .btn--ghost:hover {
+      background: var(--color-surface);
+    }
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn:hover {
+    .btn:hover,
+    .btn:active {
       transform: none;
     }
   }

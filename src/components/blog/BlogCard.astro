@@ -35,7 +35,12 @@ const formattedDate = formatDate(pubDate);
 <article class="blog-card glass-card">
   {
     heroImage && (
-      <a href={href} class="blog-card__image-link" tabindex="-1" aria-hidden="true">
+      <a
+        href={href}
+        class="blog-card__image-link"
+        tabindex="-1"
+        aria-hidden="true"
+      >
         <div class="blog-card__image">
           <Picture
             src={heroImage}
@@ -121,8 +126,10 @@ const formattedDate = formatDate(pubDate);
     transition: transform var(--transition-slow);
   }
 
-  .blog-card:hover .blog-card__image :global(img) {
-    transform: scale(1.05);
+  @media (hover: hover) {
+    .blog-card:hover .blog-card__image :global(img) {
+      transform: scale(1.05);
+    }
   }
 
   .blog-card__featured {

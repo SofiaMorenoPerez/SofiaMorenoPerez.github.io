@@ -40,12 +40,13 @@ const { tag, posts } = Astro.props;
     <section class="section">
       <Container>
         <header class="tag-header">
-          <a href={withBase('/tags')} class="tag-back">← All tags</a>
+          <a href={withBase('/tags/')} class="tag-back">← All tags</a>
           <h1 class="tag-title">
             <span class="tag-hash">#</span>{tag}
           </h1>
           <p class="tag-count">
-            {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+            {posts.length}
+            {posts.length === 1 ? 'post' : 'posts'}
           </p>
         </header>
 
@@ -59,7 +60,8 @@ const { tag, posts } = Astro.props;
 
 <style>
   .main-content {
-    min-height: 100vh;
+    min-height: 100vh; /* fallback */
+    min-height: 100dvh;
     padding-top: var(--space-2xl);
   }
 

@@ -1,5 +1,11 @@
 /* Design Tokens - Astro Haze Theme */
 
+/* Breakpoint convention: media query px values across this codebase should
+   use 640 / 768 / 1024, with 900 as an additional large-breakpoint tier for
+   components that need to switch layout later than 768. CSS custom
+   properties cannot be used inside @media conditions, so these are documented
+   here rather than defined as tokens. */
+
 :root {
   /* Light mode tokens */
 
@@ -41,7 +47,9 @@
   --color-info: hsl(207, 90%, 54%);
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
@@ -80,6 +88,9 @@
   --z-overlay: 300;
   --z-toast: 500;
 
+  /* Layout */
+  --header-height: 60px;
+
   /* Container */
   --container-3xl: 48rem;
   --container-4xl: 56rem;
@@ -89,7 +100,7 @@
 }
 
 /* Dark mode tokens */
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* Glass effect - darker, more saturated */
   --glass-bg: rgba(0, 0, 0, 0.2);
   --glass-bg-solid: rgba(0, 0, 0, 0.7);
@@ -124,7 +135,7 @@
     --glass-border: rgba(0, 0, 0, 0.1);
   }
 
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     --glass-bg: rgba(20, 20, 20, 0.95);
     --glass-bg-solid: rgba(10, 10, 10, 0.98);
     --glass-blur: 0px;

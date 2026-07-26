@@ -9,7 +9,7 @@ const { intensity = 'medium', animated = true } = Astro.props;
 const opacityMap = {
   low: '0.3',
   medium: '0.5',
-  high: '0.7'
+  high: '0.7',
 };
 
 const opacity = opacityMap[intensity];
@@ -76,19 +76,23 @@ const opacity = opacityMap[intensity];
   @media (prefers-reduced-motion: no-preference) {
     .aurora-animated .aurora-1 {
       animation: float 20s ease-in-out infinite;
+      will-change: transform;
     }
 
     .aurora-animated .aurora-2 {
       animation: float 25s ease-in-out infinite reverse;
+      will-change: transform;
     }
 
     .aurora-animated .aurora-3 {
       animation: float 30s ease-in-out infinite;
+      will-change: transform;
     }
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translate(0, 0) rotate(0deg) scale(1);
     }
     25% {
@@ -121,6 +125,7 @@ const opacity = opacityMap[intensity];
         transparent 50%
       );
       animation: float 35s ease-in-out infinite;
+      will-change: transform;
     }
 
     .aurora-background::after {
@@ -130,11 +135,12 @@ const opacity = opacityMap[intensity];
         transparent 50%
       );
       animation: float 40s ease-in-out infinite reverse;
+      will-change: transform;
     }
   }
 
   /* Dark mode adjustments */
-  [data-theme="dark"] .aurora-background {
+  [data-theme='dark'] .aurora-background {
     opacity: calc(var(--opacity) * 0.6);
   }
 

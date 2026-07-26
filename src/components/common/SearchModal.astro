@@ -7,7 +7,12 @@
 // is shown when no index exists yet.
 ---
 
-<dialog id="search-modal" class="search-modal" aria-label="Site search" data-pagefind-ignore>
+<dialog
+  id="search-modal"
+  class="search-modal"
+  aria-label="Site search"
+  data-pagefind-ignore
+>
   <div class="search-box">
     <form class="search-form" role="search">
       <svg
@@ -33,7 +38,12 @@
         spellcheck="false"
         aria-label="Search this site"
       />
-      <button type="button" class="search-close" data-search-close aria-label="Close search">
+      <button
+        type="button"
+        class="search-close"
+        data-search-close
+        aria-label="Close search"
+      >
         <kbd>Esc</kbd>
       </button>
     </form>
@@ -56,7 +66,8 @@
 <style>
   .search-modal {
     /* Centered near the top so results can grow downward. */
-    margin: min(12vh, 8rem) auto auto;
+    margin: min(12vh, 8rem) auto auto; /* fallback */
+    margin: min(12dvh, 8rem) auto auto;
     width: min(37.5rem, calc(100vw - 2 * var(--space-lg)));
     padding: 0;
     color: var(--color-text);
@@ -69,10 +80,44 @@
       var(--glass-shadow),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     z-index: var(--z-overlay);
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    transition:
+      opacity var(--transition-base),
+      transform var(--transition-base),
+      overlay var(--transition-base) allow-discrete,
+      display var(--transition-base) allow-discrete;
+  }
+
+  .search-modal[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    .search-modal[open] {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
   }
 
   .search-modal::backdrop {
     background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition:
+      opacity var(--transition-base),
+      overlay var(--transition-base) allow-discrete,
+      display var(--transition-base) allow-discrete;
+  }
+
+  .search-modal[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .search-modal[open]::backdrop {
+      opacity: 0;
+    }
   }
 
   @supports not (backdrop-filter: blur(1px)) {
@@ -127,7 +172,8 @@
   }
 
   .search-body {
-    max-height: min(50vh, 24rem);
+    max-height: min(50vh, 24rem); /* fallback */
+    max-height: min(50dvh, 24rem);
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: var(--space-sm);
@@ -216,8 +262,14 @@
 </style>
 
 <script>
-  const dialog = document.getElementById('search-modal') as HTMLDialogElement | null;
-  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  import { lockScroll, unlockScroll } from '@/lib/scrollLock';
+
+  const dialog = document.getElementById(
+    'search-modal',
+  ) as HTMLDialogElement | null;
+  const input = document.getElementById(
+    'search-input',
+  ) as HTMLInputElement | null;
   const status = document.getElementById('search-status');
   const resultsList = document.getElementById('search-results');
 
@@ -234,8 +286,10 @@
     debouncedSearch: (
       query: string,
       options?: Record<string, unknown>,
-      debounceMs?: number
-    ) => Promise<{ results: Array<{ data: () => Promise<PagefindDocument> }> } | null>;
+      debounceMs?: number,
+    ) => Promise<{
+      results: Array<{ data: () => Promise<PagefindDocument> }>;
+    } | null>;
   };
   type PagefindDocument = {
     url: string;
@@ -252,13 +306,15 @@
   // runtime. The Function indirection keeps the dynamic import opaque to the
   // bundler so the browser-native import() reaches the runtime untouched.
   const dynamicImport = new Function('s', 'return import(s)') as (
-    s: string
+    s: string,
   ) => Promise<unknown>;
 
   async function loadPagefind(): Promise<Pagefind | null> {
     if (pagefind || loadFailed) return pagefind;
     try {
-      pagefind = (await dynamicImport(`${BASE}/pagefind/pagefind.js`)) as Pagefind;
+      pagefind = (await dynamicImport(
+        `${BASE}/pagefind/pagefind.js`,
+      )) as Pagefind;
       // Result URLs in the index are root-relative to the built site, so the
       // deploy base has to be prepended for project-site hosting.
       await pagefind.options({ baseUrl: `${BASE}/` });
@@ -266,7 +322,7 @@
     } catch {
       loadFailed = true;
       showStatus(
-        'Search index not found. It is generated at build time — run a production build once, then reload.'
+        'Search index not found. It is generated at build time — run a production build once, then reload.',
       );
     }
     return pagefind;
@@ -276,6 +332,7 @@
     if (!status || !resultsList) return;
     status.textContent = message;
     status.hidden = false;
+    status.classList.remove('sr-only');
     resultsList.replaceChildren();
   }
 
@@ -285,7 +342,12 @@
       showStatus(`No results for “${query}”.`);
       return;
     }
-    status.hidden = true;
+    // Visible list already conveys the results; the count only needs to
+    // reach screen readers, so it's announced via the live region without
+    // showing a duplicate visible line above the list.
+    status.hidden = false;
+    status.classList.add('sr-only');
+    status.textContent = `${docs.length} result${docs.length === 1 ? '' : 's'} for "${query}".`;
     resultsList.replaceChildren(
       ...docs.map((doc) => {
         const item = document.createElement('li');
@@ -306,7 +368,7 @@
         link.append(title, excerpt);
         item.appendChild(link);
         return item;
-      })
+      }),
     );
   }
 
@@ -320,7 +382,9 @@
     // debouncedSearch resolves to null when superseded by newer input.
     const search = await pf.debouncedSearch(query, {}, 250);
     if (!search) return;
-    const docs = await Promise.all(search.results.slice(0, MAX_RESULTS).map((r) => r.data()));
+    const docs = await Promise.all(
+      search.results.slice(0, MAX_RESULTS).map((r) => r.data()),
+    );
     // The query may have changed (or been cleared) while result data loaded.
     if (input && input.value !== query) return;
     renderResults(docs, query);
@@ -329,15 +393,17 @@
   function openModal() {
     if (!dialog || dialog.open) return;
     dialog.showModal();
-    document.documentElement.style.overflow = 'hidden';
+    lockScroll();
     input?.select();
     loadPagefind();
   }
 
-  input?.addEventListener('input', (e) => runSearch((e.target as HTMLInputElement).value));
+  input?.addEventListener('input', (e) =>
+    runSearch((e.target as HTMLInputElement).value),
+  );
 
   dialog?.addEventListener('close', () => {
-    document.documentElement.style.overflow = '';
+    unlockScroll();
   });
 
   // Close when the backdrop (the dialog element itself) is clicked.
@@ -354,7 +420,7 @@
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
     e.preventDefault();
     const links = Array.from(
-      resultsList?.querySelectorAll<HTMLAnchorElement>('.search-result') ?? []
+      resultsList?.querySelectorAll<HTMLAnchorElement>('.search-result') ?? [],
     );
     if (!input || links.length === 0) return;
     const stops: HTMLElement[] = [input, ...links];

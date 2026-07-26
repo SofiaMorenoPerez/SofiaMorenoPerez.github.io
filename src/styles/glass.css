@@ -7,7 +7,11 @@
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: all var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base);
 }
 
 /* Glass panel component */
@@ -32,14 +36,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 35px,
-      rgba(255, 255, 255, 0.01) 35px,
-      rgba(255, 255, 255, 0.01) 70px
-    );
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(255, 255, 255, 0.01) 35px,
+    rgba(255, 255, 255, 0.01) 70px
+  );
   pointer-events: none;
   opacity: 0.4;
 }
@@ -52,17 +55,23 @@
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
-  transition: all var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
-.glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 12px 40px 0 rgba(31, 38, 135, 0.25),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
+@media (hover: hover) {
+  .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 40px 0 rgba(31, 38, 135, 0.25),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
 }
 
 /* Glass button */
@@ -75,7 +84,10 @@
   padding: var(--space-sm) var(--space-lg);
   color: var(--color-text);
   font-weight: 500;
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -97,14 +109,16 @@
   transition: left var(--transition-slow);
 }
 
-.glass-button:hover::before {
-  left: 100%;
-}
+@media (hover: hover) {
+  .glass-button:hover::before {
+    left: 100%;
+  }
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
+  }
 }
 
 .glass-button:active {

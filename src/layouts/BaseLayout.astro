@@ -13,10 +13,12 @@ export interface Props {
   ogImage?: string;
   noIndex?: boolean;
   article?: {
+    type?: 'BlogPosting' | 'CreativeWork';
     publishedTime?: string;
     modifiedTime?: string;
     author?: string;
     tags?: string[];
+    year?: number;
   };
 }
 
@@ -24,7 +26,7 @@ const props = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={siteConfig.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,8 +34,18 @@ const props = Astro.props;
 
     <!-- Favicon & app icons -->
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-    <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
-    <link rel="icon" type="image/png" sizes="16x16" href={withBase('/favicon-16.png')} />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={withBase('/favicon-32.png')}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href={withBase('/favicon-16.png')}
+    />
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('/manifest.webmanifest')} />
     <meta id="theme-color-meta" name="theme-color" content="#0b0f19" />
@@ -121,6 +133,8 @@ const props = Astro.props;
 
   /* Smooth color transitions on theme change */
   html {
-    transition: background-color var(--transition-base), color var(--transition-base);
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base);
   }
 </style>
