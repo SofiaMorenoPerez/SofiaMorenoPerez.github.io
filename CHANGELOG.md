@@ -5,6 +5,33 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-07-26
+
+### Added
+
+- `site.config` now exposes `lang` / `ogLocale`, so `<html lang>` and `og:locale` can be configured per site instead of being hardcoded ([#34](https://github.com/kpab/astro-haze/issues/34))
+- Work detail pages now emit `CreativeWork` JSON-LD structured data and `og:type=article` ([#40](https://github.com/kpab/astro-haze/issues/40))
+- The search modal now opens/closes with a fade + scale transition, disabled under `prefers-reduced-motion` ([#30](https://github.com/kpab/astro-haze/issues/30))
+- CI now runs `astro check` and `astro build` on every pull request, plus an ESLint/Prettier lint gate ([#41](https://github.com/kpab/astro-haze/issues/41), [#42](https://github.com/kpab/astro-haze/issues/42))
+
+### Fixed
+
+- Hover states (cards, links, buttons) no longer stick after a tap on touch devices ([#26](https://github.com/kpab/astro-haze/issues/26))
+- Interactive elements below the 44px touch-target minimum — the menu toggle, buttons, pagination and filters — are now sized to meet it ([#27](https://github.com/kpab/astro-haze/issues/27))
+- Full-height sections now fall back correctly on iOS Safari, where `100vh` doesn't account for the collapsing toolbar ([#28](https://github.com/kpab/astro-haze/issues/28))
+- The mobile nav now locks background scroll while open (without clobbering the search modal's own scroll lock), has a fallback for browsers without `backdrop-filter`, and derives its offset from a shared header-height variable ([#29](https://github.com/kpab/astro-haze/issues/29))
+- Search result counts are now announced to screen readers ([#31](https://github.com/kpab/astro-haze/issues/31))
+- `ThemeToggle` now announces the current theme state to screen readers ([#35](https://github.com/kpab/astro-haze/issues/35))
+- Gradient brand text now falls back to a solid color where `background-clip: text` isn't supported, and the skip link now meets contrast requirements in both themes ([#36](https://github.com/kpab/astro-haze/issues/36))
+- External links now announce "opens in new tab" and are auto-detected from `href` instead of requiring manual tagging, including when a caller also passes a custom `aria-label` ([#37](https://github.com/kpab/astro-haze/issues/37))
+- The work/project filter now shows an empty state (instead of a blank grid) when no items match, and animates items in on filter change ([#38](https://github.com/kpab/astro-haze/issues/38))
+- Internal links and canonical URLs are now consistently trailing-slashed, matching the site's `trailingSlash: 'always'` config ([#39](https://github.com/kpab/astro-haze/issues/39))
+
+### Changed
+
+- `transition: all` has been replaced with explicit property lists across components, and buttons now have a dedicated `:active` press feedback state ([#32](https://github.com/kpab/astro-haze/issues/32))
+- Media query breakpoints have been consolidated from 13 ad-hoc values down to a standard set (640/768/900/1024px) ([#33](https://github.com/kpab/astro-haze/issues/33))
+
 ## [1.1.1] - 2026-07-26
 
 ### Fixed
@@ -40,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - SEO (canonical, Open Graph, Twitter cards, JSON-LD), RSS feed and XML sitemap
   - Optimized images (AVIF/WebP via `astro:assets`), accessibility and reduced-motion support
 
+[1.2.0]: https://github.com/kpab/astro-haze/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/kpab/astro-haze/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/kpab/astro-haze/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/kpab/astro-haze/releases/tag/v1.0.0
