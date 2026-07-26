@@ -3,6 +3,9 @@ export interface SiteConfig {
   title: string;
   description: string;
   author: string;
+  // Fallback only, used when astro.config.mjs's `site` is unavailable
+  // (e.g. context.site during a dev/preview run without it set). The
+  // canonical site + base configuration lives in astro.config.mjs.
   url: string;
   ogImage: string;
   twitterHandle: string;
@@ -55,6 +58,14 @@ export interface SiteConfig {
     projectsPerPage: number;
     showTechStack: boolean;
     showYear: boolean;
+  };
+
+  // Footer settings
+  footer: {
+    links: Array<{
+      name: string;
+      href: string;
+    }>;
   };
 }
 
@@ -110,6 +121,15 @@ const siteConfig: SiteConfig = {
     projectsPerPage: 9,
     showTechStack: true,
     showYear: true
+  },
+
+  footer: {
+    // Privacy/Terms are intentionally omitted by default — this theme ships
+    // without those pages, so add them here only once the pages exist.
+    links: [
+      { name: 'Sitemap', href: '/sitemap-index.xml' },
+      { name: 'RSS', href: '/rss.xml' }
+    ]
   }
 };
 
