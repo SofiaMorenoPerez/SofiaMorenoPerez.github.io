@@ -22,6 +22,11 @@
 > SEO, feeds, responsive behavior, and accessibility details needed to turn the starter into
 > a real site.
 
+> [!NOTE]
+> **Building a directory or listings site?** Check out **[Almanac](https://almanac.p4ni.com)** —
+> a premium Astro + Cloudflare directory theme by the same author, with full-text search,
+> an admin panel, moderated submissions, and monetization built in.
+
 ---
 
 ## Features
@@ -380,6 +385,17 @@ To deploy under a different repo, user site, or custom domain, update `site`, `b
 > (`https://<user>.github.io/robots.txt`), never from a project page's subpath, so
 > `public/robots.txt` is not read on a GitHub Pages project site. Submit the sitemap URL
 > directly to Google Search Console / Bing Webmaster Tools instead of relying on this file.
+
+---
+
+## More themes by kpab
+
+- **[Almanac](https://almanac.p4ni.com)** (premium) — a directory theme on Astro + Cloudflare
+  Workers + D1: bm25 full-text search, admin panel, moderated submissions, and featured-listing
+  monetization. [Get it on Gumroad →](https://kpab.gumroad.com/l/almanac)
+- [Astro Keel](https://github.com/kpab/astro-keel) — minimal, neutral portfolio + blog theme
+- [Kepler](https://github.com/kpab/astro-kepler) — navy × orange theme for blogs, portfolios & landing pages
+- [Darkness](https://github.com/kpab/astro-darkness) — dark portfolio theme with a Three.js particle background
 
 ---
 
