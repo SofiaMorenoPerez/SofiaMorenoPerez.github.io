@@ -10,6 +10,7 @@
 [![Node](https://img.shields.io/badge/Node-%E2%89%A5%2022.12-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A855F7?style=flat-square)](LICENSE)
 [![Open in StackBlitz](https://img.shields.io/badge/StackBlitz-try%20it%20online-1389FD?style=flat-square&logo=stackblitz&logoColor=white)](https://stackblitz.com/github/kpab/astro-haze)
+[![Verified on Weshipd](https://weshipd.com/badge/astro-haze.svg)](https://weshipd.com/templates/astro-haze)
 
 **[Live demo](https://kpab.github.io/astro-haze/)** · [Features](#features) · [Quick start](#quick-start) · [Configuration](#site-configuration) · [Content](#adding-content) · [Deploy](#deploy-to-github-pages)
 
