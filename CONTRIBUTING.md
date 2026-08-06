@@ -48,8 +48,14 @@ principles in mind:
 ## Pull requests
 
 1. Branch from `master` and keep each PR focused on a single topic.
-2. Follow the existing commit style: a `type: summary` subject line
-   (`feat:`, `fix:`, `docs:`, `chore:`), lower-case, imperative mood.
+2. Follow [Conventional Commits](https://www.conventionalcommits.org/): a `type: summary`
+   subject line (`feat:`, `fix:`, `docs:`, `chore:`, `build:`, `refactor:`, `style:`, `test:`,
+   `ci:`), lower-case, imperative mood. This repo uses
+   [release-please](https://github.com/googleapis/release-please) to automate versioning and
+   changelogs from these commit messages:
+   - `fix:` → patch release
+   - `feat:` → minor release
+   - `feat!:`, `fix!:`, or a `BREAKING CHANGE:` footer → major release
 3. Run `npm run check` and confirm it passes.
 4. For visual changes, include before/after screenshots in both light and dark mode.
 5. Update the README if you change configuration options, content schemas, or commands.
