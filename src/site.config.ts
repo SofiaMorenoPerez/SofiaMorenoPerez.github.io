@@ -94,17 +94,16 @@ const siteConfig: SiteConfig = {
   nav: {
     main: [
       { name: 'Home', href: '/' },
-      { name: 'Blog', href: '/blog/' },
       { name: 'Portfolio', href: '/work/' },
       { name: 'About', href: '/about/' },
     ],
   },
 
   features: {
-    blog: true,
+    blog: false,
     portfolio: true,
     landing: true,
-    rss: true,
+    rss: false,
     sitemap: true,
     search: true,
   },

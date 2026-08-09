@@ -1,0 +1,120 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/common/Header.astro';
+import Footer from '@/components/common/Footer.astro';
+import GlassCard from '@/components/ui/GlassCard.astro';
+import Section from '@/components/ui/Section.astro';
+
+const tabs = [
+  { id: 'modelado', name: 'Modelado' },
+  { id: 'normalizacion', name: 'Normalización' },
+  { id: 'sql', name: 'SQL' },
+  { id: 'proyecto', name: 'Proyecto' },
+];
+---
+
+<BaseLayout title="Evidencias" description="Evidencias académicas: Modelado, Normalización, SQL y Proyecto.">
+  <Header />
+
+  <main id="main" tabindex="-1">
+    <Section eyebrow="Universidad El Bosque" title="Evidencias" align="left" container="xl">
+      <div class="tabs">
+        <div class="tabs__list" role="tablist">
+          {tabs.map((tab, i) => (
+            <button
+              class="tabs__button"
+              class:list={{ active: i === 0 }}
+              role="tab"
+              data-tab={tab.id}
+              aria-selected={i === 0}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
+
+        {tabs.map((tab, i) => (
+          <GlassCard class="tabs__panel" class:list={{ active: i === 0 }} data-panel={tab.id}>
+            <h2>{tab.name}</h2>
+            <p>Próximamente.</p>
+          </GlassCard>
+        ))}
+      </div>
+    </Section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('.tabs__button');
+  const panels = document.querySelectorAll('.tabs__panel');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab');
+
+      buttons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      panels.forEach((p) => {
+        p.classList.toggle('active', p.getAttribute('data-panel') === target);
+      });
+    });
+  });
+</script>
+
+<style>
+  .tabs__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: var(--space-md);
+  }
+
+  .tabs__button {
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tabs__button:hover {
+    color: var(--color-text);
+  }
+
+  .tabs__button.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  .tabs__panel {
+    display: none;
+    padding: var(--space-2xl);
+  }
+
+  .tabs__panel.active {
+    display: block;
+  }
+
+  .tabs__panel h2 {
+    margin-bottom: var(--space-sm);
+    font-size: var(--text-2xl);
+  }
+
+  .tabs__panel p {
+    color: var(--color-text-muted);
+  }
+</style>

@@ -133,4 +133,4 @@ const landing = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, landing };
+export const collections = { projects, landing };
