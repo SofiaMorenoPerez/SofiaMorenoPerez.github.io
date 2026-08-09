@@ -11,16 +11,20 @@ import Section from '@/components/ui/Section.astro';
 import { Image } from 'astro:assets';
 import sofiaPhoto from '@/assets/images/sofia.jpg';
 
+
+
+
 const highlights = [
   {
-    title: 'Proyectos Full-Stack',
-    description: 'Aplicaciones desarrolladas con Java (Spring Boot) y Angular, con bases de datos relacionales.',
+    
+    title: 'Proyectos',
+    description: 'Trabajos académicos y personales que voy desarrollando: desde aplicaciones completas hasta ejercicios de clase. Un espacio que se va actualizando con el tiempo.',
     href: '/work/',
     cta: 'Ver proyectos',
   },
   {
-    title: 'Evidencias académicas',
-    description: 'Modelado, normalización, consultas SQL y desarrollo del proyecto final de Bases de Datos.',
+    title: 'Evidencias',
+    description: 'El proceso detrás de cada trabajo: análisis, diseño y desarrollo, documentado paso a paso.',
     href: '/evidencias/',
     cta: 'Ver evidencias',
   },
@@ -79,12 +83,13 @@ const highlights = [
 
     <Section
       id="highlights"
-      eyebrow="Bases de Datos"
-      title="Java y bases de datos en acción."
-      subtitle="Proyectos académicos que integran desarrollo backend, modelado de datos y buenas prácticas de ingeniería de software."
+      eyebrow="Portafolio"
+      title="Un espacio en constante crecimiento."
+      subtitle="Proyectos, ideas y evidencias que voy documentando a lo largo de mi formación."
       align="left"
       container="xl"
     >
+    
       <div class="highlights-list">
         {highlights.map((item) => (
           <GlassCard padding="lg" radius="xl" class="highlight-card">
