@@ -109,7 +109,7 @@ const siteConfig: SiteConfig = {
   },
 
   social: {
-    github: 'https://github.com/yourusername',
+    github: 'https://github.com/SofiaMorenoPerez',
     twitter: 'https://twitter.com/yourusername',
     linkedin: 'https://linkedin.com/in/yourusername',
   },

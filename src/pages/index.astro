@@ -77,8 +77,30 @@ const highlights = [
 
     <script>
       const dialog = document.getElementById('video-modal') as HTMLDialogElement;
-      document.getElementById('open-video')?.addEventListener('click', () => dialog.showModal());
-      document.getElementById('close-video')?.addEventListener('click', () => dialog.close());
+      const iframe = document.querySelector('#video-modal iframe') as HTMLIFrameElement;
+      const videoSrc = iframe.src;
+
+      function closeVideo() {
+        dialog.close();
+        iframe.src = ''; // detiene el video quitando el src
+      }
+
+      document.getElementById('open-video')?.addEventListener('click', () => {
+        iframe.src = videoSrc; // vuelve a cargar el video al abrir
+        dialog.showModal();
+      });
+
+      document.getElementById('close-video')?.addEventListener('click', closeVideo);
+
+      // También cierra si haces click fuera del video (en el fondo oscuro)
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) closeVideo();
+      });
+
+      // También cierra con la tecla Escape (el <dialog> ya lo hace solo, pero así también pausamos el video)
+      dialog.addEventListener('close', () => {
+        iframe.src = '';
+      });
     </script>
 
     <Section
