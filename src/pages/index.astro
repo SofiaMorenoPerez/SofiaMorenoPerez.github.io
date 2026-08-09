@@ -9,6 +9,8 @@ import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import GlassCard from '@/components/ui/GlassCard.astro';
 import Section from '@/components/ui/Section.astro';
+import { Image } from 'astro:assets';
+import sofiaPhoto from '@/assets/images/sofia.jpg';
 
 const showcases = [
   {
@@ -54,42 +56,45 @@ const showcases = [
     <section class="home-hero">
       <Container size="xl">
         <div class="home-hero__meta">
-          <span>Astro 7 theme system</span>
-          <span>Edition 2026</span>
+          <span>Presentación</span>
+          <span>2026</span>
         </div>
-        <h1>
-          One atmosphere.<br />
-          <span>Three ways to publish.</span>
-        </h1>
-        <div class="home-hero__footer">
-          <p>
-            Astro Haze is a modular showcase for thoughtful writing, selected
-            work, and focused campaigns—fast by default and expressive where it
-            counts.
-          </p>
-          <div class="home-hero__actions">
-            <Button href="#showcase" variant="solid" size="lg"
-              >Explore the system</Button
-            >
-            {
-              siteConfig.social.github && (
-                <Button
-                  href={siteConfig.social.github}
-                  external
-                  variant="outline"
-                  size="lg"
-                >
-                  View source <span aria-hidden="true">↗</span>
-                </Button>
-              )
-            }
+        <div class="home-hero__profile">
+          <Image src={sofiaPhoto} alt="Sofia Moreno" width={260} height={260} class="home-hero__photo" />
+          <div>
+            <h1>Sofia Moreno<span>Perez</span></h1>
+            <p class="home-hero__bio">
+              Estudiante de [tu programa] en la Universidad El Bosque. Desarrollo aplicaciones full-stack con Spring Boot y Angular.
+            </p>
+            <div class="home-hero__actions">
+              <Button id="open-video" variant="solid" size="lg">Ver mi video ▶</Button>
+              {siteConfig.social.github && (
+                <Button href={siteConfig.social.github} external variant="outline" size="lg">GitHub ↗</Button>
+              )}
+            </div>
           </div>
-        </div>
-        <div class="home-hero__orbit" aria-hidden="true">
-          <span>Write</span><span>Show</span><span>Launch</span>
         </div>
       </Container>
     </section>
+
+    <dialog id="video-modal">
+      <button id="close-video" aria-label="Cerrar">✕</button>
+      <div class="video-wrapper">
+        <iframe
+          src="src="https://www.youtube.com/embed/FvOpPeKSf_4""
+          title="Video de presentación"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </dialog>
+
+    <script>
+      const dialog = document.getElementById('video-modal') as HTMLDialogElement;
+      document.getElementById('open-video')?.addEventListener('click', () => dialog.showModal());
+      document.getElementById('close-video')?.addEventListener('click', () => dialog.close());
+    </script>
 
     <Section
       id="showcase"
@@ -253,6 +258,77 @@ const showcases = [
     letter-spacing: 0.13em;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
+    
+  }
+
+  .home-hero__profile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-2xl);
+    margin-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .home-hero__photo {
+    border-radius: 50%;
+    border: 3px solid var(--color-accent);
+    object-fit: cover;
+    width: 220px;
+    height: 220px;
+  }
+
+  .home-hero__profile h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .home-hero__profile h1 span {
+    display: block;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .home-hero__bio {
+    margin-block: var(--space-lg);
+    max-width: 40rem;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+
+  dialog#video-modal {
+    border: none;
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    max-width: 48rem;
+    width: 90vw;
+  }
+
+  dialog#video-modal::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+  }
+
+  #close-video {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: var(--text-lg);
+    cursor: pointer;
   }
 
   .home-hero h1 {
@@ -653,7 +729,13 @@ const showcases = [
     .home-hero__meta {
       align-items: flex-start;
       flex-direction: column;
-      gap: var(--space-xs);
+      gap: var(--space-xs); 
+    }
+
+    .home-hero__profile {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
     }
 
     .showcase__preview,
