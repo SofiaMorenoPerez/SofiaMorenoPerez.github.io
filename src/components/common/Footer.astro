@@ -12,15 +12,10 @@ const socialIcons = {
   linkedin: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
   instagram: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
   youtube: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>`,
+  email: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`,
 };
 
 const navItems = getEnabledNavItems();
-
-const footerLinks = siteConfig.footer.links.filter((link) => {
-  if (link.href === '/sitemap-index.xml') return siteConfig.features.sitemap;
-  if (link.href === '/rss.xml') return siteConfig.features.rss;
-  return true;
-});
 ---
 
 <footer class="site-footer" data-pagefind-ignore>
@@ -50,22 +45,6 @@ const footerLinks = siteConfig.footer.links.filter((link) => {
           </ul>
         </div>
 
-        <!-- Resources -->
-        <div class="footer-section">
-          <h4 class="footer-subtitle">Resources</h4>
-          <ul class="footer-links">
-            {
-              footerLinks.map((link) => (
-                <li>
-                  <a href={withBase(link.href)} class="footer-link">
-                    {link.name}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
         <!-- Social Links -->
         <div class="footer-section">
           <h4 class="footer-subtitle">Connect</h4>
@@ -74,7 +53,7 @@ const footerLinks = siteConfig.footer.links.filter((link) => {
               Object.entries(siteConfig.social).map(
                 ([platform, url]) =>
                   url && (
-                    <a
+                    
                       href={url}
                       class="social-link"
                       aria-label={`Follow us on ${platform} (opens in new tab)`}
@@ -102,31 +81,6 @@ const footerLinks = siteConfig.footer.links.filter((link) => {
         <p class="copyright">
           © {currentYear}
           {siteConfig.name}. All rights reserved.
-        </p>
-        <p class="credits">
-          Built with <a
-            href="https://astro.build"
-            target="_blank"
-            rel="noopener noreferrer">Astro</a
-          >
-          · Theme by {
-            siteConfig.social.github ? (
-              <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {siteConfig.author}
-              </a>
-            ) : (
-              siteConfig.author
-            )
-          }
-          · <a
-            href="https://almanac.p4ni.com"
-            target="_blank"
-            rel="noopener noreferrer">Almanac — premium directory theme</a
-          >
         </p>
       </div>
     </div>
@@ -245,27 +199,17 @@ const footerLinks = siteConfig.footer.links.filter((link) => {
   /* Bottom Bar */
   .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: var(--space-md);
     padding-top: var(--space-lg);
   }
 
-  .copyright,
-  .credits {
+  .copyright {
     margin: 0;
     color: var(--color-text-muted);
     font-size: var(--text-sm);
-  }
-
-  .credits a {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  .credits a:hover {
-    text-decoration: underline;
   }
 
   /* Mobile Styles */
