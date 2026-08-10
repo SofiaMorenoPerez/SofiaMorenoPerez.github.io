@@ -21,15 +21,12 @@ const navItems = getEnabledNavItems();
 <footer class="site-footer" data-pagefind-ignore>
   <GlassPanel variant="solid" padding="xl" radius="none">
     <div class="container footer-container">
-      <!-- Main Footer Content -->
       <div class="footer-grid">
-        <!-- Brand Section -->
         <div class="footer-section">
           <h3 class="footer-title">{siteConfig.name}</h3>
           <p class="footer-description">{siteConfig.description}</p>
         </div>
 
-        <!-- Quick Links -->
         <div class="footer-section">
           <h4 class="footer-subtitle">Quick Links</h4>
           <ul class="footer-links">
@@ -45,7 +42,6 @@ const navItems = getEnabledNavItems();
           </ul>
         </div>
 
-        <!-- Social Links -->
         <div class="footer-section">
           <h4 class="footer-subtitle">Connect</h4>
           <div class="social-links">
@@ -73,10 +69,8 @@ const navItems = getEnabledNavItems();
         </div>
       </div>
 
-      <!-- Divider -->
       <div class="glass-divider"></div>
 
-      <!-- Bottom Bar -->
       <div class="footer-bottom">
         <p class="copyright">
           © {currentYear}
@@ -166,7 +160,6 @@ const navItems = getEnabledNavItems();
     color: var(--color-accent);
   }
 
-  /* Social Links */
   .social-links {
     display: flex;
     gap: var(--space-sm);
@@ -196,7 +189,6 @@ const navItems = getEnabledNavItems();
     }
   }
 
-  /* Bottom Bar */
   .footer-bottom {
     display: flex;
     justify-content: center;
@@ -212,7 +204,6 @@ const navItems = getEnabledNavItems();
     font-size: var(--text-sm);
   }
 
-  /* Mobile Styles */
   @media (max-width: 768px) {
     .footer-grid {
       grid-template-columns: 1fr;
@@ -225,7 +216,6 @@ const navItems = getEnabledNavItems();
     }
   }
 
-  /* Focus styles */
   .footer-link:focus-visible,
   .social-link:focus-visible {
     outline: 2px solid var(--color-accent);
