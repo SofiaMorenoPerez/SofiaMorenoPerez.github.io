@@ -75,15 +75,15 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  name: 'Astro Haze',
-  title: 'Astro Haze - Glassmorphism Theme',
-  description: 'A beautiful glassmorphism multi-purpose theme for Astro 7',
-  author: 'Your Name',
-  url: 'https://kpab.github.io/astro-haze',
+  name: 'Portafolio Sofia Moreno',
+  title: 'Sofia Moreno - Portafolio',
+  description: 'Portafolio de Sofia Moreno, estudiante de Universidad El Bosque.',
+  author: 'Sofia Moreno',
+  url: 'https://sofiamorenoperez.github.io',
   ogImage: '/og-image.png',
   twitterHandle: '@yourusername',
-  lang: 'en',
-  ogLocale: 'en_US',
+  lang: 'es',
+  ogLocale: 'es_ES',
 
   theme: {
     accentColor: 'hsl(280, 70%, 60%)',
