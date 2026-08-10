@@ -110,7 +110,7 @@ const siteConfig: SiteConfig = {
 
   social: {
     github: 'https://github.com/SofiaMorenoPerez',
-    email: 'smorenoper@unbosque.edu.co'
+    email: 'mailto:smorenoper@unbosque.edu.co'
   },
 
   blog: {
