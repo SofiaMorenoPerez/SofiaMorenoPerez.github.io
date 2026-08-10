@@ -49,7 +49,7 @@ const navItems = getEnabledNavItems();
               Object.entries(siteConfig.social).map(
                 ([platform, url]) =>
                   url && (
-                    
+                    <a
                       href={url}
                       class="social-link"
                       aria-label={`Follow us on ${platform} (opens in new tab)`}
