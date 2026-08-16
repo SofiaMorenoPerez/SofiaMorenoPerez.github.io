@@ -4,7 +4,7 @@ summary: 'Diseño del modelo de datos para un sistema, identificando entidades, 
 cover: ../../assets/images/projects/modelo-entidad-relacion.jpeg
 coverAlt: 'Diagrama de modelo entidad-relación'
 tech: ['Modelado de datos', 'Bases de Datos']
-role: 'Diseño y modelado's
+role: 'Diseño y modelado'
 year: 2026
 featured: true
 ---
