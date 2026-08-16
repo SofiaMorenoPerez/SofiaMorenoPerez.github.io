@@ -95,6 +95,7 @@ const siteConfig: SiteConfig = {
     main: [
       { name: 'Home', href: '/' },
       { name: 'Portfolio', href: '/work/' },
+      { name: 'Evidencias', href: '/evidencias/' },
       { name: 'About', href: '/about/' },
     ],
   },
