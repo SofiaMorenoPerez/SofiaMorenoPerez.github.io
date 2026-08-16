@@ -27,6 +27,7 @@ Relaciones
 Cardinalidades
 ## Entidades y relaciones
 
+## Entidades 
 - **Usuario**: cédula, tipo de documento, nombre, edad, correo, contraseña plataforma.
 - **Contenido**: ID, título, fecha de lanzamiento, tipo.
 - **Categoría**: ID, tipo.
@@ -34,6 +35,7 @@ Cardinalidades
 - **Historial_Búsqueda**: ID.
 - **Historial_Visto**: ID.
 
+## Relaciones
 - **Productor – Contenido**: Tener (M:M)
 - **Historial_Búsqueda – Contenido**: Registra (M:M) — atributos: término buscado, fecha.
 - **Historial_Búsqueda – Usuario**: Tener (1:1)
