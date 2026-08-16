@@ -93,10 +93,10 @@ const siteConfig: SiteConfig = {
 
   nav: {
     main: [
-      { name: 'Home', href: '/' },
-      { name: 'Portfolio', href: '/work/' },
+      { name: 'Inicio', href: '/' },
+      { name: 'Portafolio', href: '/work/' },
       { name: 'Evidencias', href: '/evidencias/' },
-      { name: 'About', href: '/about/' },
+      { name: 'Sobre mí', href: '/about/' },
     ],
   },
 
