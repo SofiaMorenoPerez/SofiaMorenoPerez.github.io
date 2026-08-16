@@ -1,10 +1,10 @@
 ---
 title: 'Modelo Entidad-Relación'
 summary: 'Diseño del modelo de datos para un sistema, identificando entidades, atributos y relaciones antes de pasar a la base de datos.'
-cover: ../../assets/images/projects/modelo-entidad-relacion.png
+cover: ../../assets/images/projects/modelo-entidad-relacion.jpeg
 coverAlt: 'Diagrama de modelo entidad-relación'
 tech: ['Modelado de datos', 'Bases de Datos']
-role: 'Diseño y modelado'
+role: 'Diseño y modelado's
 year: 2026
 featured: true
 ---
@@ -25,7 +25,7 @@ Explica alguna decisión importante que tomaste al modelar (por ejemplo, por qu�
 
 ## Ejemplo de trabajo
 
-![Ejercicio propuesto](../../assets/images/projects/modelo-entidad-relacion.png)
+![Ejercicio propuesto](../../assets/images/projects/modelo-entidad-relacion.jpeg)
 
 Aquí describes brevemente qué muestra esa imagen (el ejercicio que resolviste).
 
