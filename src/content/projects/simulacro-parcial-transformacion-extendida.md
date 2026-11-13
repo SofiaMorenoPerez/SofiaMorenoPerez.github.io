@@ -2,17 +2,15 @@
 title: 'Simulacro de Parcial: Transformación Extendida'
 summary: 'Simulacro del primer parcial de Bases de Datos 1: modelo entidad–relación extendido para la cadena de salas de cine CineAndes, con entidades débiles, especialización, relaciones recursivas y agregación.'
 cover: ../../assets/images/projects/imgentidad1.jpg
-coverAlt: 'Solución de Punto 1: modelo entidad–relación extendido de CineAndes en notación de Peter Chen'
+coverAlt: 'Solución del Punto 1: modelo entidad–relación extendido de CineAndes en notación de Peter Chen'
 tech: ['Modelo ER extendido', 'Notación de Peter Chen', 'Bases de Datos']
 role: 'Diseño y modelado'
 year: 2026
 featured: false
 ---
-El 12 de septiembre nos dieron una propuesta de trabajo. Como se venía pronto nuestro primer parcial, hicimos un simulacro de cómo sería el próximo. El primer punto es de **Transformación Extendida**: una cadena de salas de cine, **CineAndes**, que tiene sedes, salas, sillas, películas, funciones, clientes y empleados, necesita un modelo conceptual que cumpla unas reglas de negocio. En la imagen se adjuntan las relaciones y restricciones para realizarlo.
+El 12 de septiembre nos dieron una propuesta de trabajo. Como se venía pronto nuestro primer parcial, hicimos un simulacro de cómo sería el próximo. El primer punto es de **Transformación Extendida**: una cadena de salas de cine, **CineAndes**, que tiene sedes, salas, sillas, películas, funciones, clientes y empleados, necesita un modelo conceptual que cumpla unas reglas de negocio. A continuación se presentan las relaciones y restricciones para realizarlo.
 
 ## Las restricciones con las que vamos a trabajar
-
-![Enunciado del Punto 1: reglas de negocio de CineAndes](../../assets/images/projects/res1.jpeg)
 
 **PUNTO 1 — Diseño del modelo entidad–relación extendido (20 puntos)**
 
@@ -41,8 +39,6 @@ La cadena de salas de cine CineAndes necesita un modelo conceptual que cumpla la
 **k.** Cada compra que un cliente hace para una función determinada se paga con un único MEDIO DE PAGO. Un mismo medio de pago se usa en muchas compras. El medio de pago corresponde a esa compra concreta, no al cliente ni a la función por separado.
 
 ## Aquí están las preguntas a resolver
-
-![Preguntas del Punto 1: Se pide](../../assets/images/projects/res2.jpeg)
 
 **Se pide:**
 
