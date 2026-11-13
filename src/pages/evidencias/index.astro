@@ -4,6 +4,12 @@ import Header from '@/components/common/Header.astro';
 import Footer from '@/components/common/Footer.astro';
 import GlassCard from '@/components/ui/GlassCard.astro';
 import Section from '@/components/ui/Section.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '@/lib/url';
+
+const projects = await getCollection('projects');
+const modelado = projects.filter((p) => p.data.tech.includes('Modelo ER extendido') || p.data.tech.includes('Modelado de datos'));
+
 
 const tabs = [
   { id: 'modelado', name: 'Modelado' },
@@ -34,11 +40,19 @@ const tabs = [
         </div>
 
         {tabs.map((tab, i) => (
-          <GlassCard class="tabs__panel" class:list={{ active: i === 0 }} data-panel={tab.id}>
-            <h2>{tab.name}</h2>
-            <p>Próximamente.</p>
-          </GlassCard>
+  <GlassCard class="tabs__panel" class:list={{ active: i === 0 }} data-panel={tab.id}>
+    <h2>{tab.name}</h2>
+    {tab.id === 'modelado' ? (
+      <ul class="tabs__list-items">
+        {modelado.map((p) => (
+          <li><a href={withBase(`/work/${p.id}/`)}>{p.data.title}</a></li>
         ))}
+      </ul>
+    ) : (
+      <p>Próximamente.</p>
+    )}
+  </GlassCard>
+))}
       </div>
     </Section>
   </main>
