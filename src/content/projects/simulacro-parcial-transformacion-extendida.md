@@ -1,7 +1,7 @@
 ---
 title: 'Simulacro de Parcial: Transformación Extendida'
 summary: 'Simulacro del primer parcial de Bases de Datos 1: modelo entidad–relación extendido para la cadena de salas de cine CineAndes, con entidades débiles, especialización, relaciones recursivas y agregación.'
-cover: ../../assets/images/projects/cine.jpg
+cover: ../../assets/images/projects/cine.jpeg
 coverAlt: 'Solución del Punto 1: modelo entidad–relación extendido de CineAndes en notación de Peter Chen'
 tech: ['Modelo ER extendido', 'Notación de Peter Chen', 'Bases de Datos']
 role: 'Diseño y modelado'
