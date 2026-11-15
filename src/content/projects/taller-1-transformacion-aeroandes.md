@@ -1,7 +1,7 @@
 ---
 title: 'Taller 1: Transformación de modelos (AeroAndes)'
 summary: 'Taller 1 de Bases de Datos 1: transformación del modelo conceptual de la aerolínea AeroAndes a un modelo entidad–relación transformado en notación de Peter Chen, con justificación de cada regla aplicada.'
-cover: ../../assets/images/projects/aeropuerto.jpeg
+cover: ../../assets/images/projects/aeropuerto.jpg
 coverAlt: 'Modelo entidad–relación transformado de la aerolínea AeroAndes en notación de Peter Chen'
 tech: ['Modelado de datos', 'Modelo ER transformado', 'Notación de Peter Chen', 'draw.io', 'Bases de Datos']
 role: 'Diseño y modelado'
