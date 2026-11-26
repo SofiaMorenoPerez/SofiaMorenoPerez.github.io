@@ -1,7 +1,7 @@
 ---
 title: 'Modelo Entidad-Relación'
 summary: 'Diseño de un diagrama de ER de Chen para un sistema de una Plataforma Streaming para La Universidad del Bosque, identificando entidades, atributos y relaciones antes de pasar a la base de datos.'
-cover: ../../assets/images/projects/modelo-entidad-relacion.jpeg
+cover: ../../assets/images/projects/play.jpg
 coverAlt: 'Diagrama de modelo entidad-relación'
 tech: ['Modelado de datos', 'Bases de Datos']
 role: 'Diseño y modelado'
