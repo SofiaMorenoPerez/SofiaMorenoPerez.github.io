@@ -8,18 +8,23 @@ import { getCollection } from 'astro:content';
 import { withBase } from '@/lib/url';
 
 const projects = await getCollection('projects');
-const modelado = projects.filter((p) => p.data.tech.includes('Modelo ER extendido') || p.data.tech.includes('Modelado de datos'));
 
-
-const tabs = [
-  { id: 'modelado', name: 'Modelado' },
-  { id: 'normalizacion', name: 'Normalización' },
-  { id: 'sql', name: 'SQL' },
-  { id: 'proyecto', name: 'Proyecto' },
+// Cada pestaña muestra las entradas cuyo `tech` incluya alguna de sus etiquetas.
+const tabDefs = [
+  { id: 'modelado',      name: 'Modelado',          tags: ['Modelo ER extendido', 'Modelado de datos'] },
+  { id: 'normalizacion', name: 'Normalización',     tags: ['Normalización'] },
+  { id: 'algebra',       name: 'Álgebra relacional', tags: ['Álgebra relacional'] },
+  { id: 'sql',           name: 'SQL',               tags: ['SQL'] },
+  { id: 'proyecto',      name: 'Proyecto',          tags: ['Proyecto'] },
 ];
+
+const tabs = tabDefs.map((tab) => ({
+  ...tab,
+  items: projects.filter((p) => p.data.tech.some((t) => tab.tags.includes(t))),
+}));
 ---
 
-<BaseLayout title="Evidencias" description="Evidencias académicas: Modelado, Normalización, SQL y Proyecto.">
+<BaseLayout title="Evidencias" description="Evidencias académicas: Modelado, Normalización, Álgebra relacional, SQL y Proyecto.">
   <Header />
 
   <main id="main" tabindex="-1">
@@ -40,19 +45,19 @@ const tabs = [
         </div>
 
         {tabs.map((tab, i) => (
-  <GlassCard class="tabs__panel" class:list={{ active: i === 0 }} data-panel={tab.id}>
-    <h2>{tab.name}</h2>
-    {tab.id === 'modelado' ? (
-      <ul class="tabs__list-items">
-        {modelado.map((p) => (
-          <li><a href={withBase(`/work/${p.id}/`)}>{p.data.title}</a></li>
+          <GlassCard class="tabs__panel" class:list={{ active: i === 0 }} data-panel={tab.id}>
+            <h2>{tab.name}</h2>
+            {tab.items.length > 0 ? (
+              <ul class="tabs__list-items">
+                {tab.items.map((p) => (
+                  <li><a href={withBase(`/work/${p.id}/`)}>{p.data.title}</a></li>
+                ))}
+              </ul>
+            ) : (
+              <p>Próximamente.</p>
+            )}
+          </GlassCard>
         ))}
-      </ul>
-    ) : (
-      <p>Próximamente.</p>
-    )}
-  </GlassCard>
-))}
       </div>
     </Section>
   </main>
@@ -130,5 +135,13 @@ const tabs = [
 
   .tabs__panel p {
     color: var(--color-text-muted);
+  }
+
+  .tabs__list-items {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0 0;
+    display: grid;
+    gap: var(--space-sm);
   }
 </style>

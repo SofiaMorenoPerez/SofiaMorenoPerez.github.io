@@ -351,3 +351,361 @@ button {
     display: flex;
   }
 }
+
+
+
+/* ==========================================
+   NEON PURPLE 3D TABLES - HR & ALGEBRA
+========================================== */
+
+.hr-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 38px 0;
+  padding: 3px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    #bd7cff,
+    #7c3aed,
+    #e879f9,
+    #9333ea
+  );
+  box-shadow:
+    0 0 8px rgba(168, 85, 247, 0.45),
+    0 0 22px rgba(168, 85, 247, 0.25),
+    0 12px 30px rgba(65, 25, 110, 0.20);
+  transform: perspective(1200px) rotateX(1deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hr-table-wrapper:hover {
+  transform: perspective(1200px) rotateX(0deg) translateY(-4px);
+  box-shadow:
+    0 0 12px rgba(192, 132, 252, 0.65),
+    0 0 32px rgba(168, 85, 247, 0.35),
+    0 18px 38px rgba(65, 25, 110, 0.25);
+}
+
+/* Tabla compartida */
+.prose .hr-table,
+.prose .algebra-table {
+  display: table;
+  width: 100%;
+  min-width: 750px;
+  max-width: none;
+  margin: 0;
+  overflow: visible;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 15px;
+  background: #170d27;
+  font-size: 0.9rem;
+}
+
+/* Encabezado neón */
+.prose .hr-table thead,
+.prose .algebra-table thead {
+  background: linear-gradient(
+    120deg,
+    #4c1d95,
+    #7e22ce,
+    #a855f7,
+    #6b21a8
+  );
+  color: #ffffff;
+}
+
+.prose .hr-table th,
+.prose .algebra-table th {
+  padding: 18px 16px;
+  text-align: left;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background: transparent;
+  border-bottom: 2px solid #d8b4fe;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.65),
+    0 0 14px rgba(216, 180, 254, 0.55);
+  white-space: nowrap;
+}
+
+/* Celdas */
+.prose .hr-table td,
+.prose .algebra-table td {
+  padding: 16px;
+  color: #eee4ff;
+  border-bottom: 1px solid rgba(192, 132, 252, 0.18);
+  vertical-align: top;
+  line-height: 1.65;
+  background: transparent;
+}
+
+/* Filas alternadas */
+.prose .hr-table tbody tr:nth-child(odd),
+.prose .algebra-table tbody tr:nth-child(odd) {
+  background: linear-gradient(100deg, #25143b, #302047);
+}
+
+.prose .hr-table tbody tr:nth-child(even),
+.prose .algebra-table tbody tr:nth-child(even) {
+  background: linear-gradient(100deg, #1b112b, #26183a);
+}
+
+/* Primera columna destacada */
+.prose .hr-table tbody td:first-child,
+.prose .algebra-table tbody td:first-child {
+  color: #d8b4fe;
+  font-weight: 800;
+  text-shadow: 0 0 9px rgba(192, 132, 252, 0.45);
+}
+
+/* Símbolos del álgebra */
+.prose .algebra-table tbody td:nth-child(2) {
+  color: #e9b8ff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(216, 180, 254, 0.75);
+}
+
+/* Hover con brillo */
+.prose .hr-table tbody tr,
+.prose .algebra-table tbody tr {
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.prose .hr-table tbody tr:hover,
+.prose .algebra-table tbody tr:hover {
+  background: linear-gradient(100deg, #48216d, #632c91);
+  box-shadow:
+    inset 4px 0 0 #e879f9,
+    0 0 18px rgba(168, 85, 247, 0.22);
+}
+
+.prose .hr-table tbody tr:last-child td,
+.prose .algebra-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Código dentro de las tablas */
+.prose .hr-table code,
+.prose .algebra-table code {
+  color: #f0abfc;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(216, 180, 254, 0.25);
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+/* Bordes redondeados superiores */
+.prose .hr-table thead tr th:first-child,
+.prose .algebra-table thead tr th:first-child {
+  border-top-left-radius: 14px;
+}
+
+.prose .hr-table thead tr th:last-child,
+.prose .algebra-table thead tr th:last-child {
+  border-top-right-radius: 14px;
+}
+
+/* Adaptación para móviles */
+@media (max-width: 768px) {
+  .hr-table-wrapper {
+    margin: 26px 0;
+    border-radius: 12px;
+  }
+
+  .prose .hr-table,
+  .prose .algebra-table {
+    font-size: 0.82rem;
+  }
+
+  .prose .hr-table th,
+  .prose .algebra-table th,
+  .prose .hr-table td,
+  .prose .algebra-table td {
+    padding: 12px;
+  }
+}
+
+
+/* ==========================================
+   NEON PURPLE - TEXT CLEAN / LINES GLOW
+========================================== */
+
+/* Texto normal: limpio y legible */
+.prose .hr-table td,
+.prose .algebra-table td {
+  color: #eee7f8;
+  text-shadow: none;
+}
+
+/* Encabezados */
+.prose .hr-table th,
+.prose .algebra-table th {
+  color: #ffffff;
+  text-shadow: none;
+  border-bottom: 2px solid #e879f9;
+}
+
+/* Primera columna */
+.prose .hr-table tbody td:first-child,
+.prose .algebra-table tbody td:first-child {
+  color: #d8b4fe;
+  text-shadow: none;
+}
+
+/* Símbolos matemáticos */
+.prose .algebra-table tbody td:nth-child(2) {
+  color: #e9b8ff;
+  text-shadow: none;
+}
+
+/* Líneas divisorias con brillo */
+.hr-table-wrapper {
+  border: 2px solid #a855f7;
+  box-shadow:
+    0 0 7px rgba(168, 85, 247, 0.65),
+    0 0 18px rgba(168, 85, 247, 0.30),
+    0 12px 28px rgba(65, 25, 110, 0.20);
+}
+
+/* Separadores horizontales */
+.prose .hr-table td,
+.prose .algebra-table td {
+  border-bottom: 1px solid rgba(192, 132, 252, 0.45);
+}
+
+/* Hover: brillo en la línea lateral, no en las letras */
+.prose .hr-table tbody tr:hover,
+.prose .algebra-table tbody tr:hover {
+  background: #48216d;
+  box-shadow: inset 4px 0 0 #e879f9;
+}
+
+/* Código SQL */
+.prose .hr-table code,
+.prose .algebra-table code {
+  color: #f0d9ff;
+  text-shadow: none;
+}
+
+
+/* ==========================================
+   NEON PURPLE - BLOQUES DE CÓDIGO (TERMINAL)
+========================================== */
+
+.prose pre {
+  /* fondo morado oscuro + barra superior de terminal con 3 puntos */
+  background-color: #170d27 !important; /* !important: Astro/Shiki pone un fondo inline */
+  background-image:
+    radial-gradient(circle at 20px 15px, #ff5f56 5px, transparent 6px),
+    radial-gradient(circle at 40px 15px, #ffbd2e 5px, transparent 6px),
+    radial-gradient(circle at 60px 15px, #27c93f 5px, transparent 6px),
+    linear-gradient(120deg, #4c1d95, #7e22ce, #a855f7, #6b21a8);
+  background-size: 100% 30px;
+  background-repeat: no-repeat;
+
+  color: #ffffff !important;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  border: 2px solid #a855f7;
+  border-radius: 14px;
+  padding: 46px 22px 20px; /* 30px de barra + aire */
+  margin: 28px 0;
+  overflow-x: auto;
+  max-width: 100%;
+
+  box-shadow:
+    0 0 7px rgba(168, 85, 247, 0.65),
+    0 0 18px rgba(168, 85, 247, 0.30),
+    0 12px 28px rgba(65, 25, 110, 0.20);
+}
+
+/* Letras blancas (anula los colores de sintaxis inline de Shiki) */
+.prose pre code,
+.prose pre code span {
+  color: #ffffff !important;
+  background: none !important;
+  font-family: inherit;
+  text-shadow: none;
+}
+
+/* Selección de texto dentro del código */
+.prose pre ::selection {
+  background: #a855f7;
+  color: #ffffff;
+}
+
+/* Scrollbar horizontal morado */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+}
+.prose pre::-webkit-scrollbar-thumb {
+  background: #a855f7;
+  border-radius: 8px;
+}
+
+/* Imágenes de resultado con el mismo marco neón */
+.prose img {
+  border: 2px solid #a855f7;
+  border-radius: 14px;
+  box-shadow:
+    0 0 7px rgba(168, 85, 247, 0.55),
+    0 0 18px rgba(168, 85, 247, 0.25);
+}
+
+/* ==========================================
+   CAJA DE DESCARGA - NEON PURPLE
+========================================== */
+
+.prose .download-box {
+  margin: 28px 0;
+  padding: 22px;
+  background: #170d27;
+  border: 2px solid #a855f7;
+  border-radius: 14px;
+  box-shadow:
+    0 0 7px rgba(168, 85, 247, 0.65),
+    0 0 18px rgba(168, 85, 247, 0.30),
+    0 12px 28px rgba(65, 25, 110, 0.20);
+}
+
+.prose .download-box__title {
+  margin: 0 0 14px;
+  color: #d8b4fe;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.prose .download-box__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.prose .download-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(120deg, #4c1d95, #7e22ce, #a855f7);
+  border: 1px solid #e879f9;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prose .download-btn:hover {
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(232, 121, 249, 0.6);
+}
